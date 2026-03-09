@@ -67,7 +67,7 @@ export async function getTopMovers(userId: string) {
     .select("name_normalized, price, receipts!inner(user_id, date)")
     .eq("receipts.user_id", userId)
     .not("name_normalized", "is", null)
-    .order("receipts.date", { ascending: true });
+    .order("created_at", { ascending: true });
   if (error) throw new Error(error.message);
 
   const itemMap: Record<string, number[]> = {};
